@@ -13,8 +13,10 @@ func (TimeCLient) ToDay(layout string) string {
 	// Obtener la hora en formato HH:MM:SS
 	// formattedTime := jsDate.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
 
+	date := jsDate.Call("toISOString").String()[0:10]
 	// Imprimir la hora formateada
-	// d.Log("hora formateada", formattedTime)
 
-	return jsDate.Call("toISOString").String()[0:10]
+	// js.Global().Get("console").Call("log", "hora formateada", date)
+
+	return date
 }
