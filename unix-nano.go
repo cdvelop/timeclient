@@ -7,7 +7,7 @@ func (TimeCLient) UnixNano() int64 {
 	msTimestamp := jsDate.Call("getTime").Float()
 	nanoTimestamp := int64(msTimestamp * 1e6)
 
-	js.Global().Get("console").Call("log", "tiempo unix ID:", nanoTimestamp)
+	// js.Global().Get("console").Call("log", "tiempo unix ID:", nanoTimestamp)
 
 	return nanoTimestamp
 }
