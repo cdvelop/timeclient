@@ -7,14 +7,14 @@ import (
 )
 
 // date ej: 2006-01-02,  0 para Domingo, 1 para Lunes, etc.
-func (TimeCLient) WeekDayNumber(date_in string) (int, error) {
+func (TimeCLient) WeekDayNumber(date_in string) (d int, err string) {
 
 	format_date, err := timetools.ChangeDateSeparator(date_in, "/")
-	if err != nil {
+	if err != "" {
 		return 0, err
 	}
 
 	jsDate := js.Global().Get("Date").New(format_date)
 
-	return jsDate.Call("getDay").Int(), nil
+	return jsDate.Call("getDay").Int(), ""
 }
