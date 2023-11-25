@@ -1,3 +1,5 @@
 package timeclient
 
-type TimeCLient struct{}
+type timeCLient struct {
+	current_date string
+}

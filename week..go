@@ -7,7 +7,7 @@ import (
 )
 
 // date ej: 2006-01-02,  0 para Domingo, 1 para Lunes, etc.
-func (TimeCLient) WeekDayNumber(date_in string) (d int, err string) {
+func (timeCLient) WeekDayNumber(date_in string) (d int, err string) {
 
 	format_date, err := timetools.ChangeDateSeparator(date_in, "/")
 	if err != "" {

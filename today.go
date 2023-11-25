@@ -5,7 +5,11 @@ import (
 )
 
 // layout ej: 2006-01-02
-func (TimeCLient) ToDay(layout string) string {
+func (t timeCLient) ToDay(layout string) string {
+
+	if t.current_date != "" {
+		return t.current_date
+	}
 
 	// Obtener la fecha actual en JavaScript
 	jsDate := js.Global().Get("Date").New()

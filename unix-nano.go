@@ -2,7 +2,7 @@ package timeclient
 
 import "syscall/js"
 
-func (TimeCLient) UnixNano() int64 {
+func (timeCLient) UnixNano() int64 {
 	jsDate := js.Global().Get("Date").New()
 	msTimestamp := jsDate.Call("getTime").Float()
 	nanoTimestamp := int64(msTimestamp * 1e6)
