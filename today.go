@@ -4,8 +4,17 @@ import (
 	"syscall/js"
 )
 
-// layout ej: 2006-01-02
-func (t timeCLient) ToDay(layout string) string {
+func (t timeCLient) DateToDay() string {
+	return t.date(false)
+}
+
+func (t timeCLient) DateToDayHour() string {
+	return t.date(true)
+}
+
+func (t timeCLient) date(with_hour bool) string {
+
+	var hour string
 
 	if t.current_date != "" {
 		return t.current_date
@@ -14,13 +23,20 @@ func (t timeCLient) ToDay(layout string) string {
 	// Obtener la fecha actual en JavaScript
 	jsDate := js.Global().Get("Date").New()
 
-	// Obtener la hora en formato HH:MM:SS
-	// formattedTime := jsDate.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
+	if with_hour {
+		hour = " " + currentHour(&jsDate)
+		// js.Global().Get("console").Call("log", "hora formateada", hour)
 
+	}
+
+	// fecha formateada
 	date := jsDate.Call("toISOString").String()[0:10]
-	// Imprimir la hora formateada
+	// js.Global().Get("console").Call("log", "fecha formateada", date)
 
-	// js.Global().Get("console").Call("log", "hora formateada", date)
+	return date + hour
+}
 
-	return date
+// hora en formato 24hras HH:MM:SS ej:15:04:58
+func currentHour(date *js.Value) string {
+	return date.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
 }
