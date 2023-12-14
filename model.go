@@ -1,5 +1,12 @@
 package timeclient
 
+import "syscall/js"
+
 type timeCLient struct {
-	current_date string
+	jsDate    js.Value
+	real_date string
+
+	fake_date string
+	only_date string
+	hour      string
 }

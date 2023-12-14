@@ -3,7 +3,7 @@ package timeclient
 func Add() *timeCLient {
 
 	t := &timeCLient{
-		current_date: "",
+		fake_date: "",
 	}
 
 	return t

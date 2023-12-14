@@ -2,41 +2,36 @@ package timeclient
 
 import (
 	"syscall/js"
+
+	"github.com/cdvelop/timetools"
 )
 
-func (t timeCLient) DateToDay() string {
-	return t.date(false)
+func (t *timeCLient) DateToDay() string {
+
+	t.setDate()
+
+	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date)
+
+	return t.only_date
 }
 
-func (t timeCLient) DateToDayHour() string {
-	return t.date(true)
+func (t *timeCLient) DateToDayHour(seconds ...bool) (date, hour string) {
+
+	t.setDate()
+
+	return timetools.DateToDayHour(t.real_date, t.fake_date, seconds...)
 }
 
-func (t timeCLient) date(with_hour bool) string {
-
-	var hour string
-
-	if t.current_date != "" {
-		return t.current_date
-	}
+func (t *timeCLient) setDate() {
 
 	// Obtener la fecha actual en JavaScript
-	jsDate := js.Global().Get("Date").New()
+	t.jsDate = js.Global().Get("Date").New()
 
-	if with_hour {
-		hour = " " + currentHour(&jsDate)
-		// js.Global().Get("console").Call("log", "hora formateada", hour)
+	// hora en formato 24hras HH:MM:SS ej:15:04:58
+	t.hour = t.jsDate.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
+	// js.Global().Get("console").Call("log", "hora formateada", t.hour)
 
-	}
+	t.real_date = t.jsDate.Call("toISOString").String()[0:10] + " " + t.hour
+	// js.Global().Get("console").Call("log", "fecha formateada", t.real_date)
 
-	// fecha formateada
-	date := jsDate.Call("toISOString").String()[0:10]
-	// js.Global().Get("console").Call("log", "fecha formateada", date)
-
-	return date + hour
-}
-
-// hora en formato 24hras HH:MM:SS ej:15:04:58
-func currentHour(date *js.Value) string {
-	return date.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
 }
