@@ -3,23 +3,24 @@ package timeclient
 import (
 	"syscall/js"
 
+	"github.com/cdvelop/model"
 	"github.com/cdvelop/timetools"
 )
 
-func (t *timeCLient) DateToDay(left_day_format ...bool) string {
+func (t *timeCLient) DateToDay(df *model.DateFormat) string {
 
 	t.setDate()
 
-	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date)
+	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date, df)
 
 	return t.only_date
 }
 
-func (t *timeCLient) DateToDayHour(seconds ...bool) (date, hour string) {
+func (t *timeCLient) DateToDayHour(df *model.DateFormat) (date, hour string) {
 
 	t.setDate()
 
-	return timetools.DateToDayHour(t.real_date, t.fake_date, seconds...)
+	return timetools.DateToDayHour(t.real_date, t.fake_date, df)
 }
 
 func (t *timeCLient) setDate() {
