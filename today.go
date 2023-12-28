@@ -6,7 +6,7 @@ import (
 	"github.com/cdvelop/timetools"
 )
 
-func (t *timeCLient) DateToDay() string {
+func (t *timeCLient) DateToDay(left_day_format ...bool) string {
 
 	t.setDate()
 
