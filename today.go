@@ -6,20 +6,20 @@ import (
 	"github.com/cdvelop/timetools"
 )
 
-func (t *timeCLient) DateToDay(df timetools.DateFormatAdapter) string {
+func (t *timeCLient) DateToDay(dateFormatStructPointer any) string {
 
 	t.setDate()
 
-	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date, df)
+	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date, dateFormatStructPointer)
 
 	return t.only_date
 }
 
-func (t *timeCLient) DateToDayHour(df timetools.DateFormatAdapter) (date, hour string) {
+func (t *timeCLient) DateToDayHour(dateFormatStructPointer any) (date, hour string) {
 
 	t.setDate()
 
-	return timetools.DateToDayHour(t.real_date, t.fake_date, df)
+	return timetools.DateToDayHour(t.real_date, t.fake_date, dateFormatStructPointer)
 }
 
 func (t *timeCLient) setDate() {
