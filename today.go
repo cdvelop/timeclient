@@ -3,11 +3,10 @@ package timeclient
 import (
 	"syscall/js"
 
-	"github.com/cdvelop/model"
 	"github.com/cdvelop/timetools"
 )
 
-func (t *timeCLient) DateToDay(df *model.DateFormat) string {
+func (t *timeCLient) DateToDay(df timetools.DateFormatAdapter) string {
 
 	t.setDate()
 
@@ -16,7 +15,7 @@ func (t *timeCLient) DateToDay(df *model.DateFormat) string {
 	return t.only_date
 }
 
-func (t *timeCLient) DateToDayHour(df *model.DateFormat) (date, hour string) {
+func (t *timeCLient) DateToDayHour(df timetools.DateFormatAdapter) (date, hour string) {
 
 	t.setDate()
 
