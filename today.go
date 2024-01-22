@@ -7,31 +7,17 @@ import (
 )
 
 func (t *timeCLient) DateToDay(dateFormatStructPointer any) string {
-
 	t.setDate()
-
 	t.only_date, _ = timetools.DateToDayHour(t.real_date, t.fake_date, dateFormatStructPointer)
-
 	return t.only_date
 }
 
 func (t *timeCLient) DateToDayHour(dateFormatStructPointer any) (date, hour string) {
-
 	t.setDate()
-
 	return timetools.DateToDayHour(t.real_date, t.fake_date, dateFormatStructPointer)
 }
 
 func (t *timeCLient) setDate() {
-
-	// Obtener la fecha actual en JavaScript
-	t.jsDate = js.Global().Get("Date").New()
-
-	// hora en formato 24hras HH:MM:SS ej:15:04:58
-	t.hour = t.jsDate.Call("toLocaleTimeString", "en", map[string]interface{}{"hour12": false}).String()
-	// js.Global().Get("console").Call("log", "hora formateada", t.hour)
-
-	t.real_date = t.jsDate.Call("toISOString").String()[0:10] + " " + t.hour
+	t.real_date = js.Global().Call("currentDate").String()
 	// js.Global().Get("console").Call("log", "fecha formateada", t.real_date)
-
 }
