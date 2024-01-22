@@ -10,10 +10,14 @@ function currentDate() {
 
     const date = year + "-" + month + "-" + day;
 
-    // Obtén la hora local en formato de 24 horas
-    const hour = now_date.toLocaleTimeString('es-ES', { hour12: false });
+
+    // Opciones formato de 24 horas HH:MM:SS
+    const hour_format = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+
+    // Formatea la hora en el formato HH:MM:SS
+    const hour = new Intl.DateTimeFormat('es-ES', hour_format).format(now_date);
 
     // console.log("NEW DATE:", date, " hora:", hour);
 
-    return date+" "+hour
+    return date + " " + hour
 }
